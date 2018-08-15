@@ -57,6 +57,16 @@ build-chromeheadless:
 push-chromeheadless:
 	$(call push_docker_container,chromeheadless,$(VERSION_CHROME_HEADLESS))
 
+
+#
+# alpine
+#
+build-alpine:
+	$(call build_docker_container,./alpine/Dockerfile,alpine,$(VERSION_ALPINE))
+
+push-alpine:
+	$(call push_docker_container,alpine,$(VERSION_ALPINE))
+
 #
 # Docker build def
 #
