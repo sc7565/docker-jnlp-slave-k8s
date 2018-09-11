@@ -21,7 +21,10 @@ RUN usermod -aG docker root
 #RUN apt-get update
 
 # Change /home/jenkins ownership to root
-RUN chown -R root /home/jenkins
+RUN chown -R root:root /home/jenkins
+RUN chmod -R 777 /home/jenkins
+RUN mkdir -p /usr/lib/node_modules
+RUN chmod -R 777 /usr/lib/node_modules
 
 # Add python virtualenv and libs
 #RUN apt-get install -y python-pip python-dev libxml2-dev libxslt1-dev zlib1g-dev
@@ -29,10 +32,11 @@ RUN chown -R root /home/jenkins
 
 # node.js
 # versions: https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
-#RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
-#UN apt-get install -y nodejs
-#RUN apt-get install -y npm nodejs-legacy
-#RUN npm install -g jasmine-node
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+RUN npm install -g jasmine-node
+RUN CYPRESS_CACHE_FOLDER=. npm install cypress
 
 # install junit
 #RUN apt-get install -y junit

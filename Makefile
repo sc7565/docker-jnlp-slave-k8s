@@ -1,8 +1,8 @@
 include env_make
-NS = garland
+NS = us.gcr.io
 #VERSION ?= latest
 
-REPO_BASENAME = docker-jnlp-slave-k8s
+REPO_BASENAME = bettercloud-non-prod
 
 #
 # all
@@ -66,6 +66,16 @@ build-alpine:
 
 push-alpine:
 	$(call push_docker_container,alpine,$(VERSION_ALPINE))
+
+#
+# nodejs
+#
+build-nodejs:
+	$(call build_docker_container,./nodejs/Dockerfile,nodejs,$(VERSION_NODEJS))
+
+push-nodejs:
+	$(call push_docker_container,nodejs,$(VERSION_NODEJS))
+
 
 #
 # Docker build def
